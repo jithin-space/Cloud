@@ -65,3 +65,74 @@ Libvirt is simply a virtualization management library. It manages both KVM and Q
 libvirt is a C library with bindings in other languages. ( python, perl, ruby,java , javascript via nodejs and php )
 
 ![Alt libvirt](libvirt.png)
+
+
+## 4. VM creation
+
+There are three tools that are used for same purpose. We need to make sure how they are different
+
+`virsh`  is a command line interface that can be used to create , destroy  , stop , start and edit vm's and configure virtual environments like virtual networks 
+
+`virt-install`  is a command line tool that simplifies the process of creating a vm
+
+`virt-manager`  is a gui that can be used for the same purpose as `virsh`
+
+kvm is a full virtualization solution for linux hardware containing virtualization extensions ( intel VT or amd-v) . It consist of a loadable kernel module kvm.ko that provides the core virtualization infrastructure and a processor specific module kvm-intel.ko or kvm-amd.ko
+
+
+    apt install qemu-kvm libvirt-clients libvirt-daemon-system
+
+    adduser jithin libvirt
+    adduser jithin libvirt-qemu
+
+    reboot
+
+    virsh list --all
+
+since libvirt defaults to qemu:///session for non-root . so from your user you will need to 
+
+virsh --connect qemu:///system list --all
+
+install a vm ( it requires the virt-viewer for graphical display.)
+
+virt-install --virt-type kvm --memory 1024 --disk size=10 --cdrom ~/Downloads/debian9.iso --name debianstretch
+
+it will let us into installing debian ... Once installed we have an image file in Virtual Machines folder with qcow2 format.
+
+# 3. QCOW2
+
+Qcow2 is a file format for disk image files used by QEMU. It stands for QEMU copy on write and
+it uses a disk storage optimization strategy that delays allocation of storage unit until it is acutally needed. 
+
+one of the main characteristics of qcow disk images is that files with this format can grow as data is added.  This is contrast with raw disk images , which allocate the whole image space to a file, even it parts of it are empty.
+
+qcow format also allows storing changes made to a read only base image on a separate qcow file by using copy on write. This new file contains the path to the base image to be able to refer back to it when required. When a particular piece of data has to be read from this new image, the content is retrieved from it,if it is new and was stored there.if it is not , the data is fetched from the base image.
+
+raw image..when dd an iso
+
+dd if=debian9.iso of=debian.raw
+
+qemu-img convert -f raw -O qcow2 debian.raw debian.qcow2.
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
