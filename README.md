@@ -33,7 +33,7 @@ These hypervisors run on a conventional operating system just as other computer 
 
 eg. VMware, Workstation, VirtualBox, QEMU 
 
-! (hypervisors.png)
+!(hypervisors.png)
 Th
 
 You can run instances of variety of operating systems that will share the virtualized hardware resources. This is in contrast with the operating system-level virtualization ( like containers ) where all instances share same kernel
