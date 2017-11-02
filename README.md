@@ -114,7 +114,14 @@ dd if=debian9.iso of=debian.raw
 
 qemu-img convert -f raw -O qcow2 debian.raw debian.qcow2.
 
- 
+we can make an qcow2 image from a base / backing image from either raw/qcow2 image so that it will consume only the size as it is written.
+
+qemu-image create -f qcow2 -b back.raw new.qcow2
+
+check the size of new.qcow2 before and after every boot..it will grow..
+qemu-image info new.qcow2
+
+
 
 
 
